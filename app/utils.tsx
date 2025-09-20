@@ -197,7 +197,16 @@ export const formatDate = (date: Date) => {
 // --- Easter Egg: Konami Code Hook ---
 export const useKonamiCode = (callback: () => void) => {
   const [sequence, setSequence] = React.useState<string[]>([]);
-  const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+  React.useEffect(() => {
+    // Moved inside this useEffect
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+    if (sequence.join(',') === konamiCode.join(',')) {
+      callback();
+      setSequence([]);
+    }
+  }, [sequence, callback]);
 
   React.useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -206,13 +215,6 @@ export const useKonamiCode = (callback: () => void) => {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
-
-  React.useEffect(() => {
-    if (sequence.join(',') === konamiCode.join(',')) {
-      callback();
-      setSequence([]);
-    }
-  }, [sequence, callback, konamiCode]);
 };
 
 // --- Theme Toggle Hook ---
