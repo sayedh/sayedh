@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowUpRight, Github, Linkedin, Mail, ExternalLink, ChevronRight, Sparkles, Code2, Palette, Zap, Globe, Terminal, Camera, Download } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail, ExternalLink, ChevronRight, Sparkles, Code2, Palette, Zap, Globe, Terminal, Download } from "lucide-react";
 
 // --- Data ---
 const projects = [
@@ -15,7 +15,7 @@ const projects = [
   },
   {
     title: "Portfolio v2",
-    description: "The very site you're looking at! A modern, animated, and responsive portfolio built with the latest web technologies to showcase my work.",
+    description: "The very site you&apos;re looking at! A modern, animated, and responsive portfolio built with the latest web technologies to showcase my work.",
     tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Framer Motion"],
     link: "#",
     color: "from-orange-500 to-rose-500",
@@ -247,7 +247,7 @@ const Header = () => {
 
           <a href="#contact"
              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-teal-500 to-orange-500 hover:from-teal-400 hover:to-orange-400 px-5 py-2.5 rounded-full text-sm font-medium transition-all hover:scale-105 shadow-lg shadow-teal-500/25">
-            Let's Talk <ChevronRight className="w-4 h-4" />
+            Let&apos;s Talk <ChevronRight className="w-4 h-4" />
           </a>
         </div>
       </header>
@@ -330,7 +330,7 @@ const HeroSection = () => {
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-6 animate-fadeInUp animation-delay-100">
-            I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-orange-500 to-indigo-600">Sayed Haque</span>
+            I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-orange-500 to-indigo-600">Sayed Haque</span>
           </h1>
 
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-300 mb-8 h-12 animate-fadeInUp animation-delay-200">
@@ -592,12 +592,12 @@ const ContactSection = () => {
             </div>
 
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Let's Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-orange-500">Amazing</span> Together
+              Let&apos;s Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-orange-500">Amazing</span> Together
             </h2>
 
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Whether you have a project in mind, need technical expertise, or just want to connect,
-              I'm always open to discussing new opportunities.
+              I&apos;m always open to discussing new opportunities.
             </p>
           </div>
 
