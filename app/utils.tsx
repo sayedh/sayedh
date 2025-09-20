@@ -212,7 +212,7 @@ export const useKonamiCode = (callback: () => void) => {
       callback();
       setSequence([]);
     }
-  }, [sequence, callback]);
+  }, [sequence, callback, konamiCode]);
 };
 
 // --- Theme Toggle Hook ---

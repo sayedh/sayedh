@@ -177,7 +177,7 @@ const Header = () => {
           
           <a href="#contact" 
              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 px-5 py-2.5 rounded-full text-sm font-medium transition-all hover:scale-105 pulse-animation">
-            Let's Talk <ChevronRight className="w-4 h-4" />
+            Let&apos;s Talk <ChevronRight className="w-4 h-4" />
           </a>
         </div>
       </header>
@@ -206,7 +206,7 @@ const HeroSection = () => {
       setCurrentRole((prev) => (prev + 1) % roles.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [roles.length]);
 
   return (
     <section id="about" className="min-h-screen flex flex-col justify-center pt-20 relative">
@@ -232,7 +232,7 @@ const HeroSection = () => {
         </div>
         
         <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-6 fade-in-up stagger-1">
-          I'm <span className="gradient-text">Sayed Haque</span>
+          I&apos;m <span className="gradient-text">Sayed Haque</span>
         </h1>
         
         <h2 className="text-2xl md:text-4xl font-medium text-gray-300 mb-8 h-12 fade-in-up stagger-2">
@@ -482,12 +482,12 @@ const ContactSection = () => {
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Let's Build Something <span className="gradient-text">Amazing</span> Together
+            Let&apos;s Build <span className="gradient-text">Amazing</span> Together
           </h2>
           
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Whether you have a project in mind, need technical expertise, or just want to connect, 
-            I'm always open to discussing new opportunities.
+            I&apos;m always open to discussing new opportunities.
           </p>
         </div>
         
