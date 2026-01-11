@@ -2,72 +2,95 @@
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import { ArrowUpRight, Github, Linkedin, Mail, ExternalLink, ChevronRight, Sparkles, Code2, Palette, Zap, Globe, Terminal, Download } from "lucide-react";
+import { SiTerraform, SiAmazonwebservices, SiPython, SiGo, SiDocker, SiKubernetes, SiReact, SiCisco, SiGitlab, SiLinux, SiJavascript, SiNextdotjs } from "react-icons/si";
 
 // --- Data ---
 const projects = [
   {
-    title: "Cloudbats - Tech Blog",
-    description: "A personal blog where I share tutorials and insights on AWS, cloud computing, and various web technologies. Built on WordPress and hosted on Amazon Lightsail.",
-    tags: ["WordPress", "Amazon Lightsail", "AWS", "Content Creation"],
+    title: "Terraform UniFi Provider",
+    description: "Rebuilt and maintained a custom Terraform provider in Go to interact with the UniFi controller's REST API. Published to the Terraform Registry with 2,000+ downloads.",
+    tags: ["Go", "Terraform", "REST API", "Open Source", "IaC"],
+    link: "https://registry.terraform.io/providers/sayedh/unifi",
+    color: "from-purple-500 to-indigo-600",
+    icon: <Terminal className="w-6 h-6" />,
+    image: "/projects/terraform-unifi.png"
+  },
+  {
+    title: "CloudBats - Cloud Consultancy",
+    description: "Co-founded a 24/7 cloud consultancy organization. Built the company website featuring AWS, Oracle, Splunk, and Cisco services with AI integration capabilities.",
+    tags: ["Next.js", "Tailwind CSS", "Vercel", "GitLab CI/CD"],
     link: "https://cloudbats.com",
     color: "from-teal-500 to-cyan-600",
-    icon: <Globe className="w-6 h-6" />
+    icon: <Globe className="w-6 h-6" />,
+    image: "/projects/cloudbats.png"
   },
   {
-    title: "Portfolio v2",
-    description: "The very site you&apos;re looking at! A modern, animated, and responsive portfolio built with the latest web technologies to showcase my work.",
-    tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Framer Motion"],
-    link: "#",
+    title: "CloudBatsX - Tech Blog",
+    description: "A statically generated tech blog sharing AWS tutorials and cloud computing insights. Features articles on AWS CLI, IAM, Lightsail, Route53, and more.",
+    tags: ["Next.js", "Markdown", "Tailwind CSS", "Vercel", "GitHub"],
+    link: "https://cloudbatsx.com",
     color: "from-orange-500 to-rose-500",
-    icon: <Palette className="w-6 h-6" />
+    icon: <Code2 className="w-6 h-6" />,
+    image: "/projects/cloudbatsx.png"
   },
   {
-    title: "E-commerce Platform",
-    description: "A full-stack e-commerce application with features like product catalog, shopping cart, user authentication, and a Stripe integration for payments.",
-    tags: ["React", "Node.js", "Express", "MongoDB", "Stripe API"],
-    link: "#",
-    color: "from-indigo-500 to-purple-600",
-    icon: <Zap className="w-6 h-6" />
+    title: "Personal Portfolio",
+    description: "The very site you&apos;re looking at! A modern, animated portfolio deployed via GitHub Actions to AWS S3 with CloudFront CDN distribution.",
+    tags: ["Next.js", "Tailwind CSS", "GitHub Actions", "AWS S3", "CloudFront"],
+    link: "https://sayedh.com",
+    color: "from-pink-500 to-purple-600",
+    icon: <Palette className="w-6 h-6" />,
+    image: "/projects/portfolio.png"
   },
 ];
 
 const skills = [
-  { name: "JavaScript", level: 90, category: "Language", icon: "⚡" },
-  { name: "TypeScript", level: 85, category: "Language", icon: "🔷" },
-  { name: "React", level: 92, category: "Framework", icon: "⚛️" },
-  { name: "Next.js", level: 88, category: "Framework", icon: "▲" },
-  { name: "Node.js", level: 80, category: "Runtime", icon: "🟢" },
-  { name: "Tailwind CSS", level: 95, category: "Styling", icon: "💨" },
-  { name: "AWS", level: 75, category: "Cloud", icon: "☁️" },
-  { name: "Docker", level: 70, category: "DevOps", icon: "🐳" },
-  { name: "Figma", level: 82, category: "Design", icon: "🎨" },
-  { name: "Git", level: 90, category: "Tool", icon: "🌿" },
+  { name: "Terraform", category: "DevOps", icon: <SiTerraform className="w-8 h-8 text-purple-500" />, color: "from-purple-500 to-purple-600" },
+  { name: "AWS", category: "Cloud", icon: <SiAmazonwebservices className="w-8 h-8 text-orange-400" />, color: "from-orange-400 to-orange-500" },
+  { name: "Python", category: "Language", icon: <SiPython className="w-8 h-8 text-yellow-400" />, color: "from-yellow-400 to-yellow-500" },
+  { name: "Go", category: "Language", icon: <SiGo className="w-8 h-8 text-cyan-400" />, color: "from-cyan-400 to-cyan-500" },
+  { name: "Docker", category: "DevOps", icon: <SiDocker className="w-8 h-8 text-blue-400" />, color: "from-blue-400 to-blue-500" },
+  { name: "Kubernetes", category: "DevOps", icon: <SiKubernetes className="w-8 h-8 text-blue-500" />, color: "from-blue-500 to-blue-600" },
+  { name: "React", category: "Framework", icon: <SiReact className="w-8 h-8 text-cyan-400" />, color: "from-cyan-400 to-cyan-500" },
+  { name: "Cisco", category: "Infrastructure", icon: <SiCisco className="w-8 h-8 text-blue-500" />, color: "from-blue-500 to-blue-600" },
+  { name: "GitLab CI/CD", category: "DevOps", icon: <SiGitlab className="w-8 h-8 text-orange-500" />, color: "from-orange-500 to-orange-600" },
+  { name: "Linux", category: "OS", icon: <SiLinux className="w-8 h-8 text-yellow-500" />, color: "from-yellow-500 to-yellow-600" },
+  { name: "JavaScript", category: "Language", icon: <SiJavascript className="w-8 h-8 text-yellow-400" />, color: "from-yellow-400 to-yellow-500" },
+  { name: "Next.js", category: "Framework", icon: <SiNextdotjs className="w-8 h-8 text-white" />, color: "from-slate-600 to-slate-800" },
 ];
 
 const experiences = [
   {
-    duration: "2021 - PRESENT",
-    role: "Cloud Support Engineer",
-    company: "Amazon Web Services",
-    description: "Provided technical support and solutions to customers using a wide range of AWS services. Specialized in container services (ECS, EKS) and serverless technologies (Lambda, API Gateway).",
-    tags: ["AWS", "Kubernetes", "Docker", "Lambda", "Customer Support"],
-    achievements: ["Resolved 500+ customer tickets", "95% satisfaction rating", "AWS Certified Solutions Architect"]
+    duration: "Nov 2022 - PRESENT",
+    role: "Senior Network & DevOps Engineer",
+    company: "IQT",
+    description: "Architecting and automating network infrastructure deployments using Terraform and GitLab CI/CD. Building full-stack applications with React, Next.js, and Go for internal tooling. Leading network design for events with 500+ users.",
+    tags: ["Terraform", "GitLab CI/CD", "React", "Python", "AWS", "Kubernetes"],
+    achievements: ["Reduced manual configuration by 80%", "Built self-service React dashboard", "2,000+ downloads on Terraform provider"]
   },
   {
-    duration: "2019 - 2021",
-    role: "Frontend Developer",
-    company: "Tech Solutions Inc.",
-    description: "Developed and maintained responsive user interfaces for client websites using React and Next.js. Worked closely with designers to deliver high-quality web applications.",
-    tags: ["React", "Next.js", "Redux", "JavaScript", "SCSS"],
-    achievements: ["Led 3 major projects", "Improved load time by 40%", "Mentored 2 junior developers"]
+    duration: "Jun 2021 - Nov 2022",
+    role: "Network Engineer",
+    company: "Meta",
+    description: "Maintained and supported large-scale global enterprise network infrastructure. Configured and deployed routers, switches, firewalls, and APs from Cisco, Juniper, and Aruba in dual-stack IPv4/IPv6 environments.",
+    tags: ["Cisco", "Juniper", "Aruba", "BGP", "OSPF", "IPv4/IPv6"],
+    achievements: ["Supported global network across multiple sites", "Managed multi-vendor BGP/OSPF", "Implemented automation for root-cause analysis"]
   },
   {
-    duration: "2018 - 2019",
-    role: "Junior Web Developer",
-    company: "Creative Agency",
-    description: "Assisted in the development of websites for small businesses using HTML, CSS, and JavaScript. Gained experience with version control and agile development.",
-    tags: ["HTML", "CSS", "JavaScript", "jQuery", "Git"],
-    achievements: ["Delivered 15+ client websites", "Learned React", "First open-source contribution"]
+    duration: "Nov 2020 - Jun 2021",
+    role: "Network IT Support",
+    company: "Amazon",
+    description: "Supported and troubleshot network connectivity for a large-scale logistics fulfillment center, maintaining 24/7 operational readiness. Performed hardware/software deployment and user provisioning.",
+    tags: ["Network Support", "Windows", "Linux", "Hardware Deployment"],
+    achievements: ["Maintained 24/7 uptime", "Coordinated with global IT teams", "Supported large-scale fulfillment operations"]
+  },
+  {
+    duration: "Feb 2018 - Feb 2020",
+    role: "Network Technician",
+    company: "MultiTelecom",
+    description: "Installed and maintained telecommunications network infrastructure including LAN/WAN topologies, VLAN segmentation, and VoIP systems for enterprise clients.",
+    tags: ["LAN/WAN", "VLAN", "VoIP", "Cabling", "Network Installation"],
+    achievements: ["Enterprise client installations", "Network device configuration", "VoIP system deployments"]
   }
 ];
 
@@ -272,7 +295,7 @@ const Header = () => {
 const HeroSection = () => {
   const [currentRole, setCurrentRole] = useState(0);
   const [imageError, setImageError] = useState(false);
-  const roles = ["Frontend Developer", "AWS Enthusiast", "UI/UX Designer", "Problem Solver"];
+  const roles = ["DevOps Engineer", "Cloud Architect", "Network Engineer", "Full-Stack Developer"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -339,10 +362,10 @@ const HeroSection = () => {
           </h2>
 
           <p className="max-w-2xl text-lg text-gray-300 leading-relaxed mb-10 animate-fadeInUp animation-delay-300">
-            I craft elegant digital experiences with modern web technologies.
-            Currently exploring the intersection of <span className="text-teal-400 font-medium">AI</span>,
-            <span className="text-orange-400 font-medium"> cloud computing</span>, and
-            <span className="text-indigo-400 font-medium"> creative design</span>.
+            Senior engineer with 8+ years of experience architecting enterprise infrastructure.
+            Passionate about <span className="text-teal-400 font-medium">cloud automation</span>,
+            <span className="text-orange-400 font-medium"> DevOps practices</span>, and
+            <span className="text-indigo-400 font-medium"> full-stack development</span>.
           </p>
 
           <div className="flex flex-wrap items-center gap-6 animate-fadeInUp animation-delay-400">
@@ -360,10 +383,10 @@ const HeroSection = () => {
             </a>
 
             <div className="flex items-center gap-4">
-              <a href="#" className="p-3 rounded-full backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:scale-110 hover:-rotate-12">
+              <a href="https://github.com/sayedh" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:scale-110 hover:-rotate-12">
                 <Github className="w-5 h-5" />
               </a>
-              <a href="#" className="p-3 rounded-full backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:scale-110 hover:rotate-12">
+              <a href="https://linkedin.com/in/sayedh" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:scale-110 hover:rotate-12">
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
@@ -381,57 +404,116 @@ const HeroSection = () => {
   );
 };
 
-// --- Projects Section ---
+// --- Projects Section (with Screenshots) ---
 const ProjectsSection = () => {
   const { ref, isIntersecting } = useIntersectionObserver();
 
   return (
     <section ref={ref as React.RefObject<HTMLElement>} id="projects" className="py-24 relative">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="flex items-center gap-4 mb-12">
+        <div className="flex items-center gap-4 mb-16">
           <h2 className="text-4xl font-bold tracking-tight">Featured Projects</h2>
           <div className="h-px bg-gradient-to-r from-teal-400/50 to-transparent flex-1" />
         </div>
 
-        <div className="grid gap-8">
+        {/* Projects Grid - 2 columns on larger screens */}
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <div
+            <a
               key={index}
-              className={`group relative overflow-hidden rounded-2xl backdrop-blur-md bg-slate-800/30 border border-slate-700/50 hover:bg-slate-800/50 hover:border-slate-600/50 transition-all duration-500 ${
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group relative block rounded-2xl overflow-hidden backdrop-blur-md bg-slate-800/30 border border-slate-700/50 hover:border-slate-500/50 transition-all duration-500 ${
                 isIntersecting ? 'animate-fadeInUp' : 'opacity-0'
               }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
+              style={{ animationDelay: `${index * 0.15}s` }}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+              {/* Background gradient on hover */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
 
-              <div className="relative p-8">
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`p-3 rounded-xl bg-gradient-to-br ${project.color} text-white shadow-lg`}>
-                    {project.icon}
+              {/* Screenshot Container */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-slate-900/50">
+                {/* Gradient overlay on image */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+                
+                {/* Browser mockup frame */}
+                <div className="absolute top-0 left-0 right-0 h-8 bg-slate-800/80 backdrop-blur-sm z-20 flex items-center px-3 gap-2">
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
                   </div>
-                  <a href={project.link} className="text-gray-400 hover:text-white transition-colors">
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
+                  <div className="flex-1 mx-2">
+                    <div className="h-4 bg-slate-700/50 rounded-md flex items-center px-2">
+                      <span className="text-[10px] text-gray-500 truncate">{project.link}</span>
+                    </div>
+                  </div>
                 </div>
 
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-orange-500 transition-all">
-                  {project.title}
-                </h3>
+                {/* Project Screenshot */}
+                <div className="absolute inset-0 pt-8">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} screenshot`}
+                    fill
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
 
-                <p className="text-gray-400 mb-6 leading-relaxed">
+                {/* Hover shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 z-10" />
+              </div>
+
+              {/* Content */}
+              <div className="relative p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="text-xl font-bold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-orange-500 transition-all duration-300">
+                    {project.title}
+                  </h3>
+                  <div className="p-2 rounded-lg bg-slate-700/50 group-hover:bg-gradient-to-br group-hover:from-teal-500/20 group-hover:to-orange-500/20 transition-all">
+                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-teal-400 transition-colors" />
+                  </div>
+                </div>
+
+                <p className="text-gray-400 text-sm mb-4 leading-relaxed line-clamp-2">
                   {project.description}
                 </p>
 
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="px-3 py-1 text-xs font-medium rounded-full bg-slate-700/50 border border-slate-600/50 hover:border-teal-500/50 transition-colors">
+                  {project.tags.slice(0, 4).map((tag, i) => (
+                    <span 
+                      key={i} 
+                      className="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-700/50 border border-slate-600/30 text-gray-300 group-hover:border-teal-500/30 group-hover:text-teal-300 transition-all"
+                    >
                       {tag}
                     </span>
                   ))}
+                  {project.tags.length > 4 && (
+                    <span className="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-700/50 text-gray-500">
+                      +{project.tags.length - 4}
+                    </span>
+                  )}
                 </div>
               </div>
-            </div>
+
+              {/* Bottom gradient accent */}
+              <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+            </a>
           ))}
+        </div>
+
+        {/* View All Projects Link */}
+        <div className="mt-12 text-center">
+          <a 
+            href="https://github.com/sayedh" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-teal-400 transition-colors group"
+          >
+            <span>View more on GitHub</span>
+            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
       </div>
     </section>
@@ -472,29 +554,33 @@ const SkillsSection = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5">
           {filteredSkills.map((skill, index) => (
             <div
               key={skill.name}
-              className={`group relative p-6 rounded-xl backdrop-blur-md bg-slate-800/30 border border-slate-700/50 hover:bg-slate-800/50 hover:border-slate-600/50 transition-all hover:scale-105 ${
-                isIntersecting ? 'animate-fadeInUp' : 'opacity-0'
-              }`}
+              className={`group relative ${isIntersecting ? 'animate-fadeInUp' : 'opacity-0'}`}
               style={{ animationDelay: `${index * 0.05}s` }}
             >
-              <div className="text-4xl mb-3 animate-float" style={{ animationDelay: `${index * 0.2}s` }}>
-                {skill.icon}
+              {/* Gradient glow effect on hover */}
+              <div className={`absolute -inset-0.5 bg-gradient-to-r ${skill.color} rounded-2xl blur opacity-0 group-hover:opacity-75 transition duration-500`} />
+              
+              {/* Card content */}
+              <div className="relative flex flex-col items-center p-6 rounded-2xl backdrop-blur-md bg-slate-800/50 border border-slate-700/50 hover:border-transparent transition-all duration-300">
+                {/* Icon container with gradient background on hover */}
+                <div className={`p-4 rounded-xl bg-slate-700/50 group-hover:bg-gradient-to-br ${skill.color} transition-all duration-300 mb-4`}>
+                  <div className="transition-all duration-300 group-hover:scale-110 [&>svg]:transition-colors [&>svg]:duration-300 group-hover:[&>svg]:text-white">
+                    {skill.icon}
+                  </div>
+                </div>
+                
+                {/* Skill name */}
+                <h3 className="font-semibold text-center text-sm">{skill.name}</h3>
+                
+                {/* Category badge */}
+                <span className="mt-2 px-2 py-0.5 text-[10px] uppercase tracking-wider text-gray-400 bg-slate-700/50 rounded-full">
+                  {skill.category}
+                </span>
               </div>
-              <h3 className="font-bold mb-2">{skill.name}</h3>
-              <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-teal-500 to-orange-500 rounded-full transition-all duration-1000"
-                  style={{
-                    width: isIntersecting ? `${skill.level}%` : '0%',
-                    transitionDelay: `${index * 0.05}s`
-                  }}
-                />
-              </div>
-              <span className="text-xs text-gray-500 mt-1">{skill.level}%</span>
             </div>
           ))}
         </div>
@@ -577,9 +663,77 @@ const ExperienceSection = () => {
 
 // --- Contact Section ---
 const ContactSection = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
   const { ref, isIntersecting } = useIntersectionObserver();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate name
+    if (!name.trim()) {
+      setStatus('error');
+      setErrorMsg('Please enter your name');
+      return;
+    }
+
+    // Validate email
+    if (!email.trim()) {
+      setStatus('error');
+      setErrorMsg('Please enter your email address');
+      return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setStatus('error');
+      setErrorMsg('Please enter a valid email address');
+      return;
+    }
+    
+    // Validate message
+    if (!message.trim()) {
+      setStatus('error');
+      setErrorMsg('Please enter a message');
+      return;
+    }
+
+    setStatus('loading');
+    setErrorMsg('');
+
+    try {
+      const formData = new FormData();
+      formData.append('access_key', '17e18e47-d3a7-497c-af23-11a58e8ca792');
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('message', message);
+      formData.append('subject', 'New Portfolio Contact');
+      formData.append('from_name', 'Portfolio Contact Form');
+      
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('success');
+        setName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        setStatus('error');
+        setErrorMsg(data.message || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setStatus('error');
+      setErrorMsg('Failed to send message. Please try again.');
+    }
+  };
 
   return (
     <section ref={ref as React.RefObject<HTMLElement>} id="contact" className={`py-24 relative ${isIntersecting ? 'animate-fadeInUp' : 'opacity-0'}`}>
@@ -607,8 +761,8 @@ const ContactSection = () => {
                 <h3 className="font-bold mb-3 flex items-center gap-2">
                   <span className="text-2xl">📧</span> Email
                 </h3>
-                <a href="mailto:sayed@example.com" className="text-gray-400 hover:text-teal-400 transition-colors">
-                  sayed@example.com
+                <a href="mailto:smhaque@outlook.com" className="text-gray-400 hover:text-teal-400 transition-colors">
+                  smhaque@outlook.com
                 </a>
               </div>
 
@@ -616,7 +770,7 @@ const ContactSection = () => {
                 <h3 className="font-bold mb-3 flex items-center gap-2">
                   <span className="text-2xl">🌍</span> Location
                 </h3>
-                <p className="text-gray-400">San Francisco, CA</p>
+                <p className="text-gray-400">Sunnyvale, CA</p>
               </div>
 
               <div className="backdrop-blur-md bg-slate-800/30 border border-slate-700/50 rounded-xl p-6">
@@ -627,26 +781,92 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <div className="backdrop-blur-md bg-slate-800/30 border border-slate-700/50 rounded-xl p-6 space-y-4">
-              <input
-                type="email"
-                placeholder="Your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
-              />
-              <textarea
-                placeholder="Your message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                rows={5}
-                className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none transition-all"
-              />
-              <button
-                onClick={() => window.location.href = `mailto:sayed@example.com?subject=Portfolio Contact&body=${encodeURIComponent(message)}`}
-                className="w-full py-3 bg-gradient-to-r from-teal-500 to-orange-500 hover:from-teal-400 hover:to-orange-400 rounded-lg font-medium transition-all hover:scale-[1.02] shadow-lg">
-                Send Message
-              </button>
+            <div className="backdrop-blur-md bg-slate-800/30 border border-slate-700/50 rounded-xl p-6">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Honeypot spam protection */}
+                <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+                
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (status === 'error') setStatus('idle');
+                  }}
+                  disabled={status === 'loading'}
+                  className={`w-full px-4 py-3 bg-slate-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all disabled:opacity-50 ${
+                    status === 'error' && !name.trim()
+                      ? 'border-red-500/50'
+                      : 'border-slate-700/50'
+                  }`}
+                />
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (status === 'error') setStatus('idle');
+                  }}
+                  disabled={status === 'loading'}
+                  className={`w-full px-4 py-3 bg-slate-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all disabled:opacity-50 ${
+                    status === 'error' && (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+                      ? 'border-red-500/50'
+                      : 'border-slate-700/50'
+                  }`}
+                />
+                <textarea
+                  placeholder="Your message"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                    if (status === 'error') setStatus('idle');
+                  }}
+                  disabled={status === 'loading'}
+                  rows={5}
+                  className={`w-full px-4 py-3 bg-slate-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none transition-all disabled:opacity-50 ${
+                    status === 'error' && !message.trim()
+                      ? 'border-red-500/50'
+                      : 'border-slate-700/50'
+                  }`}
+                />
+                
+                {/* Error message */}
+                {status === 'error' && (
+                  <p className="text-red-400 text-sm">{errorMsg}</p>
+                )}
+                
+                {/* Success message */}
+                {status === 'success' && (
+                  <div className="flex items-center gap-2 text-green-400 text-sm">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Message sent successfully! I&apos;ll get back to you soon.
+                  </div>
+                )}
+                
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="w-full py-3 bg-gradient-to-r from-teal-500 to-orange-500 hover:from-teal-400 hover:to-orange-400 rounded-lg font-medium transition-all hover:scale-[1.02] shadow-lg flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100">
+                  {status === 'loading' ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Mail className="w-4 h-4" />
+                      Send Message
+                    </>
+                  )}
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -742,6 +962,14 @@ export default function Home() {
 
       ::-webkit-scrollbar-thumb:hover {
         background: linear-gradient(180deg, #0d9488, #ea580c);
+      }
+
+      /* Line clamp utility */
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
     `;
     document.head.appendChild(style);
