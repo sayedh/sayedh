@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowUpRight, Github, Linkedin, Mail, ExternalLink, ChevronRight, Sparkles, Code2, Palette, Zap, Globe, Terminal, Download } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail, ExternalLink, ChevronRight, Sparkles, Code2, Palette, Zap, Globe, Terminal } from "lucide-react";
 import { SiTerraform, SiAmazonwebservices, SiPython, SiGo, SiDocker, SiKubernetes, SiReact, SiCisco, SiGitlab, SiLinux, SiJavascript, SiNextdotjs } from "react-icons/si";
 
 // --- Data ---
@@ -375,18 +375,11 @@ const HeroSection = () => {
               <ArrowUpRight className="w-5 h-5 transition-transform group-hover:rotate-45" />
             </a>
 
-            <a href="/resume.pdf"
-               download
-               className="group flex items-center gap-2 border border-teal-500/30 hover:border-teal-400/60 px-6 py-3 rounded-full font-medium transition-all hover:bg-teal-500/10 backdrop-blur-sm">
-              Download CV
-              <Download className="w-5 h-5 transition-transform group-hover:translate-y-1" />
-            </a>
-
             <div className="flex items-center gap-4">
               <a href="https://github.com/sayedh" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:scale-110 hover:-rotate-12">
                 <Github className="w-5 h-5" />
               </a>
-              <a href="https://linkedin.com/in/sayedh" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:scale-110 hover:rotate-12">
+              <a href="https://www.linkedin.com/in/sayedhaque/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:scale-110 hover:rotate-12">
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
@@ -759,18 +752,9 @@ const ContactSection = () => {
             <div className="space-y-6">
               <div className="backdrop-blur-md bg-slate-800/30 border border-slate-700/50 rounded-xl p-6">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                  <span className="text-2xl">📧</span> Email
-                </h3>
-                <a href="mailto:smhaque@outlook.com" className="text-gray-400 hover:text-teal-400 transition-colors">
-                  smhaque@outlook.com
-                </a>
-              </div>
-
-              <div className="backdrop-blur-md bg-slate-800/30 border border-slate-700/50 rounded-xl p-6">
-                <h3 className="font-bold mb-3 flex items-center gap-2">
                   <span className="text-2xl">🌍</span> Location
                 </h3>
-                <p className="text-gray-400">Sunnyvale, CA</p>
+                <p className="text-gray-400">San Jose, CA</p>
               </div>
 
               <div className="backdrop-blur-md bg-slate-800/30 border border-slate-700/50 rounded-xl p-6">
@@ -778,6 +762,15 @@ const ContactSection = () => {
                   <span className="text-2xl">🚀</span> Status
                 </h3>
                 <p className="text-green-400">Open to opportunities</p>
+              </div>
+
+              <div className="backdrop-blur-md bg-slate-800/30 border border-slate-700/50 rounded-xl p-6">
+                <h3 className="font-bold mb-3 flex items-center gap-2">
+                  <span className="text-2xl">💼</span> Connect
+                </h3>
+                <a href="https://www.linkedin.com/in/sayedhaque/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-teal-400 transition-colors">
+                  LinkedIn Profile
+                </a>
               </div>
             </div>
 
