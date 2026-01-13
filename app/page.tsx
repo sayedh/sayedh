@@ -211,41 +211,88 @@ const useIntersectionObserver = (threshold = 0.1) => {
 };
 
 // --- Improved Particle Background Component ---
+// Generate particles only on client-side to avoid hydration mismatch
 const ParticleBackground = () => {
+  const [particles, setParticles] = useState<{
+    teal: Array<{ left: string; delay: string; duration: string }>;
+    orange: Array<{ left: string; delay: string; duration: string }>;
+    indigo: Array<{ left: string; delay: string; duration: string }>;
+    static: Array<{ left: string; top: string; width: string; height: string; color: string; opacity: number; delay: string; duration: string }>;
+  } | null>(null);
+
+  useEffect(() => {
+    // Generate random values only on client-side
+    const colors = ['#14b8a6', '#06b6d4', '#fb923c', '#f97316', '#8b5cf6'];
+    
+    setParticles({
+      teal: [...Array(40)].map(() => ({
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 20}s`,
+        duration: `${20 + Math.random() * 10}s`
+      })),
+      orange: [...Array(40)].map(() => ({
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 20}s`,
+        duration: `${25 + Math.random() * 15}s`
+      })),
+      indigo: [...Array(20)].map(() => ({
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 20}s`,
+        duration: `${30 + Math.random() * 10}s`
+      })),
+      static: [...Array(50)].map(() => {
+        const size = Math.random() * 3 + 1;
+        return {
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          width: `${size}px`,
+          height: `${size}px`,
+          color: colors[Math.floor(Math.random() * 5)],
+          opacity: Math.random() * 0.3 + 0.1,
+          delay: `${Math.random() * 10}s`,
+          duration: `${5 + Math.random() * 5}s`
+        };
+      })
+    });
+  }, []);
+
+  // Don't render anything until client-side values are generated
+  if (!particles) return null;
+
   return (
     <>
       {/* Fixed particles that move across the viewport */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        {[...Array(40)].map((_, i) => (
+        {particles.teal.map((p, i) => (
           <div
             key={`fixed-${i}`}
             className="absolute w-1 h-1 bg-teal-400 rounded-full opacity-40 animate-particle-up"
             style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 20}s`,
-              animationDuration: `${20 + Math.random() * 10}s`
+              left: p.left,
+              animationDelay: p.delay,
+              animationDuration: p.duration
             }}
           />
         ))}
-        {[...Array(40)].map((_, i) => (
+        {particles.orange.map((p, i) => (
           <div
             key={`fixed-2-${i}`}
             className="absolute w-1 h-1 bg-orange-400 rounded-full opacity-30 animate-particle-up"
             style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 20}s`,
-              animationDuration: `${25 + Math.random() * 15}s`
+              left: p.left,
+              animationDelay: p.delay,
+              animationDuration: p.duration
             }}
           />
         ))}
-        {[...Array(20)].map((_, i) => (
+        {particles.indigo.map((p, i) => (
           <div
             key={`fixed-3-${i}`}
             className="absolute w-2 h-2 bg-indigo-400 rounded-full opacity-20 animate-particle-up"
             style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 20}s`,
-              animationDuration: `${30 + Math.random() * 10}s`
+              left: p.left,
+              animationDelay: p.delay,
+              animationDuration: p.duration
             }}
           />
         ))}
@@ -253,19 +300,19 @@ const ParticleBackground = () => {
 
       {/* Static scattered particles for depth */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(50)].map((_, i) => (
+        {particles.static.map((p, i) => (
           <div
             key={`static-${i}`}
             className="absolute rounded-full animate-twinkle"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 3 + 1}px`,
-              height: `${Math.random() * 3 + 1}px`,
-              backgroundColor: ['#14b8a6', '#06b6d4', '#fb923c', '#f97316', '#8b5cf6'][Math.floor(Math.random() * 5)],
-              opacity: Math.random() * 0.3 + 0.1,
-              animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${5 + Math.random() * 5}s`
+              left: p.left,
+              top: p.top,
+              width: p.width,
+              height: p.height,
+              backgroundColor: p.color,
+              opacity: p.opacity,
+              animationDelay: p.delay,
+              animationDuration: p.duration
             }}
           />
         ))}
@@ -284,7 +331,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      const sections = ["about", "projects", "skills", "experience", "contact"];
+      const sections = ["about", "projects", "skills", "experience", "certifications", "contact"];
       const scrollPosition = window.scrollY + 100;
       for (const sectionId of sections) {
         const section = document.getElementById(sectionId);
