@@ -942,7 +942,7 @@ const ContactSection = () => {
                 <h3 className="font-bold mb-3 flex items-center gap-2">
                   <span className="text-2xl">🚀</span> Message me
                 </h3>
-                <p className="text-green-400">Let's solve that difficult problem together</p>
+                <p className="text-green-400">Let&apos;s solve that difficult problem together</p>
               </div>
 
               <div className="backdrop-blur-md bg-slate-800/30 border border-slate-700/50 rounded-xl p-6">
