@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowUpRight, Github, Linkedin, Mail, ExternalLink, ChevronRight, Sparkles, Code2, Palette, Zap, Globe, Terminal } from "lucide-react";
-import { SiTerraform, SiAmazonwebservices, SiPython, SiGo, SiDocker, SiKubernetes, SiReact, SiCisco, SiGitlab, SiLinux, SiJavascript, SiNextdotjs } from "react-icons/si";
+import { ArrowUpRight, Github, Linkedin, Mail, ExternalLink, ChevronRight, Sparkles, Code2, Palette, Zap, Globe, Terminal, Award, Shield } from "lucide-react";
+import { SiTerraform, SiAmazonwebservices, SiPython, SiGo, SiDocker, SiKubernetes, SiReact, SiCisco, SiGitlab, SiLinux, SiJavascript, SiNextdotjs, SiSplunk, SiOracle } from "react-icons/si";
 
 // --- Data ---
 const projects = [
@@ -92,6 +92,75 @@ const experiences = [
     tags: ["LAN/WAN", "VLAN", "VoIP", "Cabling", "Network Installation"],
     achievements: ["Enterprise client installations", "Network device configuration", "VoIP system deployments"]
   }
+];
+
+const certifications = [
+  {
+    provider: "AWS",
+    certs: [
+      { name: "Solutions Architect Professional", level: "Professional", color: "from-orange-500 to-amber-500", link: "https://www.credly.com/badges/40a0ec77-ffe2-480e-97d8-5c53760ff0d2" },
+      { name: "Solutions Architect Associate", level: "Associate", color: "from-orange-400 to-yellow-500", link: "https://www.credly.com/badges/a5c2a8c5-ad4f-4adf-8af1-63f0b44c05f4" },
+      { name: "Cloud Practitioner", level: "Foundational", color: "from-amber-400 to-orange-400", link: "https://www.credly.com/badges/60f75892-6ab2-4711-9d70-83fb1c6bbcac" },
+    ],
+    icon: <SiAmazonwebservices className="w-8 h-8" />,
+    color: "from-orange-500 to-amber-500",
+    bgColor: "bg-orange-500/10",
+    borderColor: "border-orange-500/30"
+  },
+  {
+    provider: "Cisco",
+    certs: [
+      { name: "CCNA", level: "Associate", color: "from-blue-500 to-cyan-500", link: "https://www.credly.com/badges/714f4c23-881e-4a46-bc52-7110f0dcfaaf" },
+    ],
+    icon: <SiCisco className="w-8 h-8" />,
+    color: "from-blue-500 to-cyan-500",
+    bgColor: "bg-blue-500/10",
+    borderColor: "border-blue-500/30"
+  },
+  {
+    provider: "HashiCorp",
+    certs: [
+      { name: "Terraform Associate", level: "Associate", color: "from-purple-500 to-violet-500", link: "https://www.credly.com/badges/505ffb53-2e95-40c9-ace6-f1db87c5d1b8" },
+    ],
+    icon: <SiTerraform className="w-8 h-8" />,
+    color: "from-purple-500 to-violet-500",
+    bgColor: "bg-purple-500/10",
+    borderColor: "border-purple-500/30"
+  },
+  {
+    provider: "Splunk",
+    certs: [
+      { name: "Core Certified Power User", level: "Power User", color: "from-green-500 to-emerald-500", link: "https://www.credly.com/badges/3ad42884-cb3f-41bb-a18f-2932a2c60a57" },
+    ],
+    icon: <SiSplunk className="w-8 h-8" />,
+    color: "from-green-500 to-emerald-500",
+    bgColor: "bg-green-500/10",
+    borderColor: "border-green-500/30"
+  },
+  {
+    provider: "CompTIA",
+    certs: [
+      { name: "CySA+", level: "Professional", color: "from-red-500 to-rose-500", link: "https://www.credly.com/badges/4a2da09e-45b5-4038-a6ba-18368a74b3f2" },
+      { name: "Security+", level: "Professional", color: "from-red-400 to-pink-500", link: "https://www.credly.com/badges/a624614d-cdbb-4e60-bc39-d38541ada108" },
+      { name: "Network+", level: "Professional", color: "from-rose-400 to-red-400", link: "https://www.credly.com/badges/31cd578e-c76b-46b7-8186-95d17cda46bb" },
+      { name: "A+", level: "Core", color: "from-pink-400 to-rose-400", link: "https://www.credly.com/badges/81f3a8a4-5569-4aeb-b269-2b7d0da11b79" },
+    ],
+    icon: <Shield className="w-8 h-8" />,
+    color: "from-red-500 to-rose-500",
+    bgColor: "bg-red-500/10",
+    borderColor: "border-red-500/30"
+  },
+  {
+    provider: "Oracle",
+    certs: [
+      { name: "Cloud Generative AI Professional", level: "Professional", color: "from-red-600 to-orange-500", link: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=88DB04A13C949E3360E6044B8EA54866B436EE9B0FE025F8EFB28A2BF7798EDD" },
+      { name: "Cloud AI Foundations Associate", level: "Associate", color: "from-red-500 to-orange-400", link: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=476973DDCFB66E305A3D0B3F93EDB2BA69B5F721901D7D8349BC6A455E697D10" },
+    ],
+    icon: <SiOracle className="w-8 h-8" />,
+    color: "from-red-600 to-orange-500",
+    bgColor: "bg-red-600/10",
+    borderColor: "border-red-600/30"
+  },
 ];
 
 // --- Custom Hooks ---
@@ -234,6 +303,7 @@ const Header = () => {
     { id: "projects", label: "Projects", icon: <Code2 className="w-4 h-4" /> },
     { id: "skills", label: "Skills", icon: <Zap className="w-4 h-4" /> },
     { id: "experience", label: "Experience", icon: <Terminal className="w-4 h-4" /> },
+    { id: "certifications", label: "Certifications", icon: <Award className="w-4 h-4" /> },
   ];
 
   return (
@@ -654,6 +724,117 @@ const ExperienceSection = () => {
   );
 };
 
+// --- Certifications Section ---
+const CertificationsSection = () => {
+  const { ref, isIntersecting } = useIntersectionObserver();
+  const totalCerts = certifications.reduce((acc, provider) => acc + provider.certs.length, 0);
+
+  return (
+    <section ref={ref as React.RefObject<HTMLElement>} id="certifications" className="py-24 relative">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="flex items-center gap-4 mb-4">
+          <h2 className="text-4xl font-bold tracking-tight">Certifications</h2>
+          <div className="h-px bg-gradient-to-r from-teal-400/50 to-transparent flex-1" />
+        </div>
+        
+        {/* Subtitle with count */}
+        <p className="text-gray-400 mb-12">
+          <span className="text-teal-400 font-semibold">{totalCerts}</span> industry-recognized certifications across cloud, security, and infrastructure
+        </p>
+
+        {/* Certifications Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {certifications.map((provider, providerIndex) => (
+            <div
+              key={provider.provider}
+              className={`group relative ${isIntersecting ? 'animate-fadeInUp' : 'opacity-0'}`}
+              style={{ animationDelay: `${providerIndex * 0.1}s` }}
+            >
+              {/* Gradient glow effect on hover */}
+              <div className={`absolute -inset-0.5 bg-gradient-to-r ${provider.color} rounded-2xl blur opacity-0 group-hover:opacity-50 transition duration-500`} />
+              
+              {/* Card content */}
+              <div className={`relative backdrop-blur-md bg-slate-800/50 border ${provider.borderColor} hover:border-transparent rounded-2xl p-6 transition-all duration-300 h-full`}>
+                {/* Provider Header */}
+                <div className="flex items-center gap-4 mb-5 pb-4 border-b border-slate-700/50">
+                  <div className={`p-3 rounded-xl ${provider.bgColor} group-hover:bg-gradient-to-br ${provider.color} transition-all duration-300`}>
+                    <div className="text-white transition-transform duration-300 group-hover:scale-110">
+                      {provider.icon}
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">{provider.provider}</h3>
+                    <p className="text-sm text-gray-400">{provider.certs.length} certification{provider.certs.length > 1 ? 's' : ''}</p>
+                  </div>
+                </div>
+
+                {/* Certifications List */}
+                <div className="space-y-3">
+                  {provider.certs.map((cert, certIndex) => (
+                    <a
+                      key={certIndex}
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 rounded-lg bg-slate-900/50 hover:bg-slate-900/80 transition-colors group/cert cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                        <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${cert.color} flex-shrink-0`} />
+                        <span className="text-gray-200 font-medium text-sm truncate">{cert.name}</span>
+                      </div>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <span className={`px-2 py-1 text-[10px] uppercase tracking-wider rounded-full bg-gradient-to-r ${cert.color} text-white font-medium opacity-80`}>
+                          {cert.level}
+                        </span>
+                        <ExternalLink className="w-3 h-3 text-gray-500 group-hover/cert:text-teal-400 transition-colors" />
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Stats Banner */}
+        <div className="mt-12 p-6 rounded-2xl backdrop-blur-md bg-slate-800/30 border border-slate-700/50">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">3</div>
+              <div className="text-sm text-gray-400 mt-1">AWS Certifications</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-red-400 to-rose-400 bg-clip-text text-transparent">4</div>
+              <div className="text-sm text-gray-400 mt-1">CompTIA Certifications</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">6</div>
+              <div className="text-sm text-gray-400 mt-1">Certification Providers</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent">{totalCerts}</div>
+              <div className="text-sm text-gray-400 mt-1">Total Certifications</div>
+            </div>
+          </div>
+        </div>
+
+        {/* View All Link */}
+        <div className="mt-8 text-center">
+          <a 
+            href="https://www.credly.com/users/sayed-haque/badges" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-teal-400 transition-colors group"
+          >
+            <span>View all badges on Credly</span>
+            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- Contact Section ---
 const ContactSection = () => {
   const [name, setName] = useState('');
@@ -759,9 +940,9 @@ const ContactSection = () => {
 
               <div className="backdrop-blur-md bg-slate-800/30 border border-slate-700/50 rounded-xl p-6">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                  <span className="text-2xl">🚀</span> Status
+                  <span className="text-2xl">🚀</span> Message me
                 </h3>
-                <p className="text-green-400">Open to opportunities</p>
+                <p className="text-green-400">Let's solve that difficult problem together</p>
               </div>
 
               <div className="backdrop-blur-md bg-slate-800/30 border border-slate-700/50 rounded-xl p-6">
@@ -988,6 +1169,7 @@ export default function Home() {
           <ProjectsSection />
           <SkillsSection />
           <ExperienceSection />
+          <CertificationsSection />
           <ContactSection />
         </main>
 
